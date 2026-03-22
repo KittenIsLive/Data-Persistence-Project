@@ -12,7 +12,7 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public Text HighscoreText;
-    public GameObject GameOverText;
+    public GameObject GameOverUI;
     
     private bool m_Started = false;
     private int m_Points;
@@ -76,12 +76,15 @@ public class MainManager : MonoBehaviour
     public void GameOver()
     {
         m_GameOver = true;
-        GameOverText.SetActive(true);
-        if (m_Points > DataManager.Instance.highScore)
+        GameOverUI.SetActive(true);
+        if (DataManager.Instance != null)
         {
-            DataManager.Instance.highScore = m_Points;
-            DataManager.Instance.topPlayerName = DataManager.Instance.currentPlayerName;
-            UpdateHighScore();
+            if (m_Points > DataManager.Instance.highScore)
+            {
+                DataManager.Instance.highScore = m_Points;
+                DataManager.Instance.topPlayerName = DataManager.Instance.currentPlayerName;
+                UpdateHighScore();
+            }
         }
     }
 
